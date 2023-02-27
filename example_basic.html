@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-Knob/1.2.13/jquery.knob.min.js"></script>
+</head>
+
+<body>
+
+<!-- Canvas element to display results.
+     Provides WebGL context, which makes everything to work. -->
+<canvas id="canvas"></canvas>
+
+<!-- Source image content to use as textures.
+     To add new images put <img> entries with different "id" and "src" attributes. -->
+<img id="carousel_11mpix" src="http://localhost:8080/carousel_3366.jpg" crossorigin="anonymous"/>
+<img id="carousel_4mpix" src="http://localhost:8080/carousel_2048.jpg" crossorigin="anonymous"/>
+<img id="carousel_1mpix" src="http://localhost:8080/carousel_1024.jpg" crossorigin="anonymous"/>
+
+<!-- Fragment shader example. -->
+<script  id="fragmentShaderExample" type="x-shader/x-fragment">
+  precision highp float;
+
+  // input image texture
+  uniform sampler2D inputImage;
+
+  // texture coordinates corresponding to the current output pixel position
+  varying vec2 texCoord;
+
+  void main() {
+    // sample the input image
+    vec4 color = texture2D(inputImage, texCoord);
+
+    // shuffle color channels and write out
+    gl_FragColor = color.bgra;
+  }
+</script>
+
+
+<!-- Main script -->
+<script>
+  function main() {
+    // Initialize WebGL
+    const canvas = document.getElementById("canvas")
+    initialize(canvas)
+
+    // Set image display resolution
+    canvas.width = 1024
+    canvas.height = 1024
+
+    // Setup a program
+    const program = buildProgram("fragmentShaderExample");
+
+    // Make output texture
+    const output = makeEmptyTexture(1024, 1024)
+
+    // Fill inputs: just a single texture
+    const inputs = {
+      inputImage: makeTextureFromImage("carousel_4mpix")
+    }
+        
+    // Run the program once
+    runProgram(program, inputs, output)
+
+    // Run the same program again
+    const anotherOutput = makeEmptyTexture(1024, 1024)
+    runProgram(program, {inputImage: output}, anotherOutput)
+    
+    displayTexture(anotherOutput)
+  }
+</script>
+
+
+<!-- Framework script -->
+<script src="script.js"></script>
+
+</body>
+</html>
