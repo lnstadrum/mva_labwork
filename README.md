@@ -14,6 +14,24 @@ We will be writing small programs (shaders) actually building output images pixe
 
 Here is a quick bottom-up introduction to GLSL shaders.
 
+```glsl
+precision highp float;
+
+// input image texture
+uniform sampler2D inputImage;
+
+// texture coordinates corresponding to the current output pixel position
+varying vec2 texCoord;
+
+void main() {
+  // sample the input image
+  vec4 color = texture2D(inputImage, texCoord);
+
+  // shuffle color channels and write out
+  gl_FragColor = color.bgra;
+}
+```
+
 * GLSL is much like C. There are functions, variables `if`s and loops (`while` and `for`).
 * `float foo;` is a variable declaration of fractional scalar type `float`.
 * We will operate float-based quantities. `float`, `vec2`, `vec3` and `vec4` are scalar, 2-, 3- and 4-component vector data types respectively.
@@ -31,7 +49,7 @@ Here is a quick bottom-up introduction to GLSL shaders.
   * `gl_FragColor` is a `vec4` variable defining the current pixel color in the shader output. In this work, it is the only way for programs to provide output. Setting its value is the main duty of `main`. `gl_FragColor` is a part of the GLSL specification.
   * In this lab work we will be using 8-bit images, i.e., every component of the output texture is internally stored as a 8-bit value. This implies `gl_FragColor` being clipped into 0..1 range.
 
-For more details check out a [GLSL ES 1.0 quick reference card](https://www.fsynth.com/pdf/webgl1_glsl_1.pdf).
+For more details check out [GLSL ES 1.0 quick reference card](https://www.fsynth.com/pdf/webgl1_glsl_1.pdf).
 
 ## Managing code
 
