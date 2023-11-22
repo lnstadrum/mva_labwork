@@ -92,6 +92,10 @@ The original input image can be perfectly reconstructed from its "base" and "det
 
 The decomposition into base/details can then be applied in a recursive fashion, taking "base" as a new input at every iteration. This leads to a multiscale pyramidal representation of the input, with "details" at multiple scales and a "base" image which can be as small as 1*1 pixel.
 
-Likewise, we can perfectly reconstruct the original input from its pyramidal representation, starting from the coarse scale "base", upsampling it, adding "details", upsampling again, etc.. Also, if we apply a multiplicative factor to the details at every scale during the reconstruction, we can amplify or attenuate certain frequencies in the reconstructed image.
+Likewise, we can perfectly reconstruct the original input from its pyramidal representation, starting from the coarse scale "base", upsampling it, adding "details", upsampling again, etc. Also, if we apply a multiplicative factor to the details at every scale during the reconstruction, we can amplify or attenuate certain frequencies in the reconstructed image.
 
 **Exercise**: make an "equalizer". A set of programs computing the multiscale representation of the input image and applying gains to the corresponding scales to control the amount of "basses", "mids" and "trebles" in the reconstructed image.
+
+ * Implement the base/details decomposition and reconstruction. Make sure the reconstructed image matches the input (a visual assessment is sufficient to conclude; no need to compare images numerically). When debugging, you may need to visually inspect the details image. Keep in mind that the textures can only hold values in 0..1 range.
+ * Perform the decomposition process recursively until a 1x1 base image is reached, then perform the reconstruction in the same way. Ensure again the resulting reconstructed image matches the input.
+ * Take inspiration from `example_with_controls.html` to apply gains to the details images at different scales during the reconstruction.
