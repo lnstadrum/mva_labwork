@@ -57,10 +57,10 @@ To execute GLSL programs, a host environment is required. We use WebGL in this w
 
 The programs are embedded into an HTML document. Check `example_basic.html` and `example_with_controls.html` for reference.
 
- * Input images are loaded using `<img>`. They are referenced using `id` attributes (required to be unique).
+ * Input images are loaded using `<img>`. They are referenced using the `id` attribute (required to be unique).
  * GLSL source code is placed into `<script>` tags with `type="x-shader/x-fragment"` and unique `id` attributes.
  * The managing code, situated within a large `<script>` block, constructs programs, assigns inputs, and launches their execution.
- * `<input>` elements can be used to add knobs to the page, in order to control uniform variables of shader programs. They are referenced by their `id`s.
+ * `<input>` elements can be used to add knobs to the page, in order to control uniform variables in shader programs. They are referenced by their `id`s.
 
 WebGL intricacies are abstracted through predefined functions:
 
@@ -97,5 +97,5 @@ Likewise, we can perfectly reconstruct the original input from its pyramidal rep
 **Exercise**: make an "equalizer". A set of programs computing the multiscale representation of the input image and applying gains to the corresponding scales to control the amount of "basses", "mids" and "trebles" in the reconstructed image.
 
  * Implement the base/details decomposition and reconstruction. Make sure the reconstructed image matches the input (a visual assessment is sufficient to conclude; no need to compare images numerically). When debugging, you may need to visually inspect the details image. Keep in mind that the textures can only hold values in 0..1 range.
- * Perform the decomposition process recursively until a 1x1 base image is reached, then perform the reconstruction in the same way. Ensure again the resulting reconstructed image matches the input.
- * Take inspiration from `example_with_controls.html` to apply gains to the details images at different scales during the reconstruction.
+ * Perform the decomposition process recursively until the 1x1 base image is reached, then perform the reconstruction in the same way. Ensure again the reconstructed image matches the input.
+ * Take inspiration from `example_with_controls.html` to apply gains to the details at different scales during the reconstruction.
