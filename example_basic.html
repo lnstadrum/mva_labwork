@@ -16,9 +16,15 @@
 <!-- Source image content to use as textures.
      To add new images put <img> entries with different "id" and "src" attributes.
      Warning: WebGL cannot load local files to textures, a webserver is required. -->
-<img id="carousel_11mpix" src="http://45.32.149.156/carousel_3366.jpg" crossorigin="anonymous"/>
-<img id="carousel_4mpix" src="http://45.32.149.156/carousel_2048.jpg" crossorigin="anonymous"/>
-<img id="carousel_1mpix" src="http://45.32.149.156/carousel_1024.jpg" crossorigin="anonymous"/>
+<img id="carousel_1mpix" src="http://199.247.15.26:8080/carousel_1mpix.jpg" crossorigin="anonymous"/>
+
+<!-- Other images (uncomment the corresponding lines to load some of them):
+  <img id="carousel_4mpix" src="http://199.247.15.26:8080/carousel_4mpix.jpg" crossorigin="anonymous"/>
+  <img id="carousel_11mpix" src="http://199.247.15.26:8080/carousel_11mpix.jpg" crossorigin="anonymous"/>
+  <img id="boat_1mpix" src="http://199.247.15.26:8080/boat_1mpix.jpg" crossorigin="anonymous"/>
+  <img id="boat_4mpix" src="http://199.247.15.26:8080/boat_4mpix.jpg" crossorigin="anonymous"/>
+-->
+
 
 <!-- Fragment shader example. -->
 <script  id="fragmentShaderExample" type="x-shader/x-fragment">
@@ -59,7 +65,7 @@
 
     // Fill inputs: just a single texture
     const inputs = {
-      inputImage: makeTextureFromImage("carousel_4mpix")
+      inputImage: makeTextureFromImage("carousel_1mpix")
     }
         
     // Run the program once
